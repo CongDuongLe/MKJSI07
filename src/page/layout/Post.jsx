@@ -6,18 +6,20 @@ const Post = () => {
     const [type, setType] = useState('posts')
 
     const baseURL = `https://jsonplaceholder.typicode.com/${type}`
-    const typeText = ['posts', 'users', 'albums']
+    const typeText = ['posts', 'users', 'albums','todos']
 
     const fetchData = async () => {
         const result = await axios.get(baseURL)
         setData(result.data)
     }
+
     useEffect(() => {
         fetchData()
     } , [type])
+    
 
-    const handleClick = (type) => {
-        setType(type)
+    const handleClick = (item) => {
+        setType(item)
     }
 
 
