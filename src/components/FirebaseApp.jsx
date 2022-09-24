@@ -1,18 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, addDoc, deleteDoc, doc, deleteField  } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
-import { async } from "@firebase/util";
 import { useUserStore } from "../zustand/store/UserStore";
 
 const FirebaseApp = () => {
   const [author, setAuthor] = useState("");
   const [quote, setQuote] = useState("");
   const [loading, setLoading] = useState(false);
-
-
-    const {
-        setQuoteInfo
-    } = useUserStore(state => state)
+  const [quoteId, setQuoteId] = useState("");
+  const [quotes, setQuotes] = useState([]);
 
   let allQuotes = [];
 
@@ -45,8 +41,6 @@ const FirebaseApp = () => {
 
   useEffect(() => {
     getQuotes();
-    setQuoteInfo([...allQuotes])
-    
   }, []);
 
 
@@ -79,12 +73,33 @@ const FirebaseApp = () => {
     [author, quote, quoteRef]
   );
 
+  console.log('postId', quoteId)
+
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+     const colRefDelete = doc(db, "quotes", `${quoteId}`);
+      await deleteDoc(colRefDelete)
+        .then(() => {
+          console.log("deleted", quoteId);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+
+ 
+
+
+
+
+
   return (
     <div className="flex flex-col px-2 py-4 h-full w-full">
       {loading ? (
         <div className="w-10 h-10 border-4 border-blue-500 rounded-full animate-spin border-t-transparent"></div>
       ) : (
-        <div aria-label="card-item-v1" className="flex flex-col w-[400px]">
+        <div aria-label="card-item-v1" className="flex flex-col w-[400px] mx-auto">
           <div className="relative flex-shrink-0 mb-5 h-[250px]">
             <img
               src="https://bit.ly/3zzCTUT"
@@ -106,7 +121,7 @@ const FirebaseApp = () => {
       <form
         onSubmit={handleSubmit}
         autoComplete="off"
-        className="w-full max-w-[600px] p-10 bg-white rounded-lg shadow"
+        className="w-full max-w-[600px] p-10 bg-white rounded-lg shadow mx-auto mt-10"
         aria-label="signup-form"
       >
         <h2 className="mb-10 text-3xl font-bold text-center">Update Quote</h2>
@@ -146,6 +161,33 @@ const FirebaseApp = () => {
           Create Quote
         </button>
       </form>
+
+        <div className="mx-auto">
+
+        <form
+          className="flex flex-col border border-slate-200 rounded-xl w-[400px] bg-pink-100 mt-4"
+          aria-label="simple-form"
+          onSubmit={handleDelete}
+        >
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Enter your postId"
+              className="w-full p-3 bg-transparent outline-none"
+              value={quoteId}
+              onChange={(e) => setQuoteId(e.target.value)}
+            />
+          </div>
+        </form>
+          <button 
+          onClick={handleDelete}
+          className="flex p-3 font-bold text-white bg-red-500 rounded-xl mx-auto mt-4 active:bg-blue-500 ">
+            Delete
+          </button>
+        </div>
+
+
+
     </div>
   );
 };

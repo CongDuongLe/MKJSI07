@@ -10,4 +10,12 @@
     .btn-action {
      @apply px-8 py-2 bg-[#4B7BE5] rounded-md text-white text-lg hover:bg-[#001D6E] scale-105 ease-in-out duration-200 transition-all mt-4
     }
+
+    .button-buoi7 {
+      @apply px-4 py-2 bg-[#FF4A4A] rounded-lg text-white hover:bg-[#4B7BE5] scale-110 ease-in-out duration-300 transition-all
+    }
+
+
+
   }
+

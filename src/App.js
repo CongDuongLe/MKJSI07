@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
+import Buoi7 from './components/Buoi7'
 import FirebaseApp from './components/FirebaseApp'
+import Main from './Main'
 import TestGlobalStore from './page/components/TestGlobalStore'
 import UserSection from './page/components/UserSection'
 import Number from './page/layout/Number'
@@ -30,7 +32,7 @@ const App = () => {
 
 
   return (
-    <div className='flex flex-1 h-full w-screen bg-red-200 justify-center items-center flex-col overflow-x-auto overflow-y-hidden'>
+    <div className='flex  h-screen w-screen bg-[#B1E1FF] justify-center items-center flex-col overflow-x-auto '>
 
     {/* <div className='text-3xl text-[#001E6C] px-8 py-2 ' >
       {number}
@@ -83,9 +85,11 @@ const App = () => {
         </button>
       </div> */}
 
-
-      <FirebaseApp/>
-
+{/* 
+      <FirebaseApp/> */}
+      {/* <Main/> */}
+      
+      <Buoi7/>
 
     </div>
   )
