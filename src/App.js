@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import Buoi7 from './components/Buoi7'
-import FirebaseApp from './components/FirebaseApp'
+import FirebaseAuth from './components/FirebaseAuth'
 import Main from './Main'
 import TestGlobalStore from './page/components/TestGlobalStore'
 import UserSection from './page/components/UserSection'
@@ -9,6 +9,17 @@ import PokemonList from './page/layout/PokemonList'
 import Post from './page/layout/Post'
 import Random from './page/layout/Random'
 import { useUserStore } from './zustand/store/UserStore'
+import FirebaseApp from './components/FirebaseApp'
+import FirebaseAuthentication from './components/FirebaseAuthentication'
+import { Login } from './components/Login'
+import Home from './components/Home'
+import RootRouter from './routes/RootRouter'
+import Navbar from './components/Navbar'
+import ApiLearning from './JSA/ApiLearning'
+import WeatherAPI from './JSA/WeatherAPI'
+
+const USER_KEY = 'user_key'
+const GOOGLE_TOKEN = 'google_token'
 
 const App = () => {
 
@@ -28,6 +39,26 @@ const App = () => {
 
   
   console.log('author',authors)
+
+
+  const userInLocalStorage = localStorage.getItem(USER_KEY)
+
+  console.log(userInLocalStorage)
+
+  const googleToken = localStorage.getItem(GOOGLE_TOKEN)
+
+
+
+
+  // nhan dc ma token : abcxyzbalalala
+
+
+
+
+
+
+
+
 
 
 
@@ -86,10 +117,35 @@ const App = () => {
       </div> */}
 
 {/* 
-      <FirebaseApp/> */}
+    
       {/* <Main/> */}
       
-      <Buoi7/>
+      {/* <Buoi7/> */}
+
+      {/* <FirebaseAuth/> */}
+
+      {/* <FirebaseApp/> */}
+      {/* <FirebaseAuthentication /> */}
+
+      {/* <Login/> */}
+
+
+      {/* {
+        userInLocalStorage ?  <Home/> : <Login/>
+      } */}
+
+      {/* {
+        googleToken ? <Home/> : <Login/>
+      } */}
+
+
+      {/* <RootRouter/> */}
+
+      {/* <ApiLearning/> */}
+      <WeatherAPI/>
+
+
+
 
     </div>
   )

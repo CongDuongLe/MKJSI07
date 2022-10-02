@@ -193,3 +193,6 @@ const FirebaseApp = () => {
 };
 
 export default FirebaseApp;
+
+
+// component : FirebaseApp.jsx
